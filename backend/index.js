@@ -8,7 +8,7 @@ const path = require('path');
 const { server, app } = require('./lib/socket.js');
 
 dotenv.config();
-const __dirname = path.resolve();
+
 
 const PORT = process.env.PORT || 3001;
 
