@@ -4,9 +4,9 @@ import ChatContainer from '../components/ChatContainer'
 
 const HomePage = () => {
   return (
-    <div className='flex basis-1/3 justify-center w-[90%] m-auto rounded-2xl'>
-         <SideBar/>
-         <ChatContainer/>
+    <div className='flex flex-col md:flex-row w-full md:w-[90%] md:m-auto md:rounded-2xl h-[100dvh] md:h-auto overflow-hidden'>
+      <SideBar />
+      <ChatContainer />
     </div>
   )
 }
