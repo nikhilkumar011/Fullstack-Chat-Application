@@ -73,7 +73,7 @@ const SideBar = () => {
       </div>
 
       {/* ── Desktop: vertical sidebar ── */}
-      <div className="hidden md:flex w-72 shrink-0 h-[90vh] bg-white border-r border-gray-100 flex-col">
+      <div className="hidden md:flex w-72 shrink-0 h-full bg-white border-r border-gray-100 flex-col">
         <div className="px-5 py-4 border-b border-gray-100">
           <h2 className="text-base font-semibold text-gray-900">Messages</h2>
           <p className="text-xs text-emerald-500 font-medium mt-0.5">
