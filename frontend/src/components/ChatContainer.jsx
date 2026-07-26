@@ -63,7 +63,7 @@ const ChatContainer = () => {
   }
 
   return (
-    <div className="flex-1 flex flex-col bg-white border-l border-slate-200 min-h-0 overflow-hidden">
+    <div className="flex-1 h-full flex flex-col bg-white border-l border-slate-200 overflow-hidden">
 
       {/* Chat Header */}
       <div className="flex items-center gap-3 px-4 py-3 border-b border-slate-200 bg-white shrink-0">
