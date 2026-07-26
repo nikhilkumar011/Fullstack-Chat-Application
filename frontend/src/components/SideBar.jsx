@@ -14,14 +14,14 @@ const SideBar = () => {
     return (
       <>
         {/* Mobile: horizontal strip */}
-        <div className="flex md:hidden w-full h-[72px] bg-white border-b border-gray-100 items-center justify-center shrink-0">
-          <div className="w-5 h-5 rounded-full border-2 border-indigo-500 border-t-transparent animate-spin" />
+        <div className="flex md:hidden w-full h-[72px] bg-slate-950 items-center justify-center shrink-0">
+          <div className="w-5 h-5 rounded-full border-2 border-violet-400 border-t-transparent animate-spin" />
         </div>
         {/* Desktop: vertical sidebar */}
-        <div className="hidden md:flex w-72 shrink-0 h-[90vh] bg-white border-r border-gray-100 items-center justify-center">
-          <div className="flex flex-col items-center gap-2">
-            <div className="w-6 h-6 rounded-full border-2 border-indigo-500 border-t-transparent animate-spin" />
-            <p className="text-xs text-slate-400">Loading...</p>
+        <div className="hidden md:flex w-72 shrink-0 h-full bg-slate-950 items-center justify-center">
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-7 h-7 rounded-full border-2 border-violet-400 border-t-transparent animate-spin" />
+            <p className="text-xs text-slate-500 font-medium tracking-wide">Loading contacts…</p>
           </div>
         </div>
       </>
@@ -31,12 +31,15 @@ const SideBar = () => {
   return (
     <>
       {/* ── Mobile: horizontal scrollable strip ── */}
-      <div className="flex md:hidden w-full bg-white border-b border-gray-100 shrink-0 flex-col">
-        <div className="flex items-center justify-between px-4 pt-3 pb-1">
-          <h2 className="text-sm font-semibold text-gray-900">Messages</h2>
-          <p className="text-xs text-emerald-500 font-medium">{onlineUsers.length} online</p>
+      <div className="flex md:hidden w-full bg-slate-950 shrink-0 flex-col">
+        <div className="flex items-center justify-between px-4 pt-3.5 pb-2">
+          <h2 className="text-sm font-bold text-white tracking-tight">Messages</h2>
+          <div className="flex items-center gap-1.5 bg-emerald-400/10 px-2 py-0.5 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_2px_rgba(52,211,153,0.6)]" />
+            <p className="text-[11px] text-emerald-400 font-semibold">{onlineUsers.length} online</p>
+          </div>
         </div>
-        <div className="flex overflow-x-auto gap-3 px-4 pb-3 scrollbar-hide">
+        <div className="flex overflow-x-auto gap-3 px-4 pb-3.5 scrollbar-hide">
           {users.map((each) => {
             const isOnline = onlineUsers.includes(each._id);
             const isSelected = selectedUser?._id === each._id;
@@ -44,26 +47,28 @@ const SideBar = () => {
               <button
                 key={each._id}
                 onClick={() => setSelectedUser(each)}
-                className="flex flex-col items-center gap-1 shrink-0 w-14"
+                className="flex flex-col items-center gap-1.5 shrink-0 w-14 group"
               >
-                <div className="relative">
+                <div className={`relative p-[2px] rounded-full transition-all duration-200 ${
+                  isSelected ? "bg-gradient-to-br from-violet-500 via-fuchsia-500 to-cyan-400" : "bg-transparent"
+                }`}>
                   {each.profilePic ? (
                     <img
                       src={each.profilePic}
                       alt={each.fullname}
-                      className={`w-11 h-11 rounded-full object-cover ${isSelected ? "ring-2 ring-indigo-500 ring-offset-1" : ""}`}
+                      className="w-11 h-11 rounded-full object-cover ring-2 ring-slate-950"
                     />
                   ) : (
-                    <div className={`w-11 h-11 rounded-full flex items-center justify-center text-white text-sm font-semibold
-                      ${isSelected ? "bg-indigo-600" : "bg-gray-700"}`}>
+                    <div className={`w-11 h-11 rounded-full flex items-center justify-center text-white text-sm font-semibold ring-2 ring-slate-950
+                      ${isSelected ? "bg-slate-900" : "bg-slate-800 group-hover:bg-slate-700"} transition-colors`}>
                       {each.fullname.charAt(0)}
                     </div>
                   )}
                   {isOnline && (
-                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white" />
+                    <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 rounded-full border-2 border-slate-950 shadow-[0_0_6px_1px_rgba(52,211,153,0.7)]" />
                   )}
                 </div>
-                <p className={`text-[10px] font-medium truncate w-full text-center ${isSelected ? "text-indigo-600" : "text-gray-700"}`}>
+                <p className={`text-[10px] font-medium truncate w-full text-center transition-colors ${isSelected ? "text-violet-300" : "text-slate-400"}`}>
                   {each.fullname.split(" ")[0]}
                 </p>
               </button>
@@ -73,14 +78,15 @@ const SideBar = () => {
       </div>
 
       {/* ── Desktop: vertical sidebar ── */}
-      <div className="hidden md:flex w-72 shrink-0 h-full bg-white border-r border-gray-100 flex-col">
-        <div className="px-5 py-4 border-b border-gray-100">
-          <h2 className="text-base font-semibold text-gray-900">Messages</h2>
-          <p className="text-xs text-emerald-500 font-medium mt-0.5">
-            {onlineUsers.length} online
-          </p>
+      <div className="hidden md:flex w-72 shrink-0 h-full bg-slate-950 flex-col">
+        <div className="px-5 py-5 border-b border-white/[0.06]">
+          <h2 className="text-lg font-bold text-white tracking-tight">Messages</h2>
+          <div className="flex items-center gap-1.5 mt-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_2px_rgba(52,211,153,0.6)]" />
+            <p className="text-xs text-emerald-400 font-semibold">{onlineUsers.length} online now</p>
+          </div>
         </div>
-        <div className="flex-1 overflow-y-auto py-2">
+        <div className="flex-1 overflow-y-auto py-3 px-2.5 space-y-1">
           {users.map((each) => {
             const isOnline = onlineUsers.includes(each._id);
             const isSelected = selectedUser?._id === each._id;
@@ -88,31 +94,36 @@ const SideBar = () => {
               <div
                 onClick={() => setSelectedUser(each)}
                 key={each._id}
-                className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors
-                  ${isSelected ? "bg-indigo-50 border-r-2 border-indigo-500" : "bg-white hover:bg-slate-50"}`}
+                className={`relative flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer transition-all duration-150
+                  ${isSelected ? "bg-white/[0.06]" : "hover:bg-white/[0.035]"}`}
               >
-                <div className="relative shrink-0">
+                {isSelected && (
+                  <span className="absolute left-0 top-2 bottom-2 w-[3px] rounded-full bg-gradient-to-b from-violet-500 via-fuchsia-500 to-cyan-400" />
+                )}
+                <div className={`relative shrink-0 p-[2px] rounded-full transition-all duration-200 ${
+                  isSelected ? "bg-gradient-to-br from-violet-500 via-fuchsia-500 to-cyan-400" : "bg-transparent"
+                }`}>
                   {each.profilePic ? (
                     <img
                       src={each.profilePic}
                       alt={each.fullname}
-                      className={`w-10 h-10 rounded-full object-cover ${isSelected ? "ring-2 ring-indigo-300" : ""}`}
+                      className="w-10 h-10 rounded-full object-cover ring-2 ring-slate-950"
                     />
                   ) : (
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-semibold
-                      ${isSelected ? "bg-indigo-600" : "bg-gray-700"}`}>
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-semibold ring-2 ring-slate-950
+                      ${isSelected ? "bg-slate-900" : "bg-slate-800"}`}>
                       {each.fullname.charAt(0)}
                     </div>
                   )}
                   {isOnline && (
-                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white" />
+                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-slate-950 shadow-[0_0_5px_1px_rgba(52,211,153,0.7)]" />
                   )}
                 </div>
                 <div className="min-w-0">
-                  <p className={`text-sm font-medium truncate ${isSelected ? "text-indigo-700" : "text-gray-800"}`}>
+                  <p className={`text-sm font-semibold truncate ${isSelected ? "text-white" : "text-slate-300"}`}>
                     {each.fullname}
                   </p>
-                  <p className={`text-xs font-medium ${isOnline ? "text-emerald-500" : "text-slate-400"}`}>
+                  <p className={`text-xs font-medium ${isOnline ? "text-emerald-400" : "text-slate-500"}`}>
                     {isOnline ? "Online" : "Offline"}
                   </p>
                 </div>
