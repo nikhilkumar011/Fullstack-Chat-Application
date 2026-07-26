@@ -95,7 +95,20 @@ const ChatContainer = () => {
       </div>
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto px-3 sm:px-5 py-4 flex flex-col gap-3 min-h-0">
+      {/* Messages Area */}
+      <div
+        className="flex-1 overflow-y-auto px-3 sm:px-5 py-4 flex flex-col gap-3 min-h-0"
+        style={{
+          backgroundColor: '#F8F8FC',
+          backgroundImage: `
+            radial-gradient(circle at 12% 8%, rgba(139,92,246,0.12), transparent 38%),
+            radial-gradient(circle at 88% 20%, rgba(217,70,239,0.09), transparent 35%),
+            radial-gradient(circle at 50% 100%, rgba(34,211,238,0.10), transparent 42%),
+            radial-gradient(rgba(148,163,184,0.4) 1px, transparent 1px)
+          `,
+          backgroundSize: 'auto, auto, auto, 24px 24px',
+        }}
+      >
         {messages.map((each) => (
           <div
             key={each._id}
