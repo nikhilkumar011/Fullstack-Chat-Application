@@ -122,3 +122,4 @@ Deployed on [Render](https://render.com). The backend serves the frontend as sta
 ## 📄 License
 
 MIT License © 2025
+# Fullstack-Chatting-Application
